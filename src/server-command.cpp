@@ -140,7 +140,7 @@ runAndRead( const char * cmdCorba,
   os=resCorba._retn();
 
   /* No memory to free in resCorba, free is done by the caller. */
-  dgDEBUG(15) <<  "Return: " << res <<endl;
+  dgDEBUG(15) <<  "Return: (" << res.length() << ") "<< res <<endl;
 
   dgDEBUGOUT(15);
 }
