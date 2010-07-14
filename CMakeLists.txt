@@ -68,6 +68,10 @@ IF(Boost_THREAD_FOUND)
   ELSE(BOOST_PATTERN_TOFIND)
     SET(BOOST_THREAD_LIB_NAME  ${Boost_THREAD_LIBRARY})
   ENDIF(BOOST_PATTERN_TOFIND)
+  
+  	IF(UNIX)
+		ADD_DEFINITIONS(-pthread)
+	ENDIF(UNIX)
 
 ELSE(Boost_THREAD_FOUND)
   MESSAGE("WARNING: Boost thread not found. Trying without the thread library")
