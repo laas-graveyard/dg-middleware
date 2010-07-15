@@ -54,7 +54,8 @@ SET(server-command_files ${ServerCommand_CPP} ${ServerCommand_Header} corba-serv
 
 SET(libs
 	server-abstract
-	server-command)
+	server-command
+	distant-shell)
 
 FOREACH(lib ${libs})
 	ADD_LIBRARY(${lib}
