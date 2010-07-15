@@ -72,6 +72,7 @@ IF(Boost_THREAD_FOUND)
   	IF(UNIX)
 		ADD_DEFINITIONS(-pthread)
 	ENDIF(UNIX)
+	ADD_DEFINITIONS(-DHAVE_LIBBOOST_THREAD)
 
 ELSE(Boost_THREAD_FOUND)
   MESSAGE("WARNING: Boost thread not found. Trying without the thread library")
