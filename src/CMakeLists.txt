@@ -76,9 +76,6 @@ FOREACH(lib ${libs})
 	  
 	IF (UNIX)  
 		TARGET_LINK_LIBRARIES(${lib} ${DYNAMIC_GRAPH_LIBRARIES})
-	ENDIF(UNIX)
-	
-	IF(UNIX)
 		TARGET_LINK_LIBRARIES(${lib} "${Boost_THREAD_LIBRARY}")
 		TARGET_LINK_LIBRARIES(${lib} "${omniORB4_link_FLAGS}")
 		TARGET_LINK_LIBRARIES(${lib} "${${lib}_dependencies}")
