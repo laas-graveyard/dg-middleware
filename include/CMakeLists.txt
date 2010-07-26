@@ -8,6 +8,7 @@ corba-server-generic.t.cpp
 server-abstract.h
 server-command.h
 distant-shell.h
+exception-dgm.h
 )
 
 # Recreate correct path for the headers

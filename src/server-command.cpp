@@ -33,7 +33,7 @@
 
 /* --- SOT --- */
 #include <dg-middleware/server-command.h>
-#include <sot-core/exception-tools.h>
+#include <dg-middleware/exception-dgm.h>
 
 #include <dynamic-graph/interpreter.h>
 

@@ -55,12 +55,15 @@ INSTALL(FILES
 SET(server-command_files ${ServerCommand_CPP} ${ServerCommand_Header} corba-server-generic.cpp)
 SET(server-abstract_files ${ServerCommand_CPP} ${ServerCommand_Header} corba-server-generic.cpp)
 SET(server-command_dependencies server-abstract)
-SET(distant-shell_dependencies ${CMAKE_INSTALL_PREFIX}/lib/plugin/contiifstream.so)
+SET(distant-shell_dependencies 
+	${CMAKE_INSTALL_PREFIX}/lib/plugin/contiifstream${CMAKE_SHARED_LIBRARY_SUFFIX} 
+	exception-dgm)
 
 SET(libs
 	server-abstract
 	server-command
-	distant-shell)
+	distant-shell
+	exception-dgm)
 
 FOREACH(lib ${libs})
 	ADD_LIBRARY(${lib}
@@ -76,11 +79,12 @@ FOREACH(lib ${libs})
 	  
 	IF (UNIX)  
 		TARGET_LINK_LIBRARIES(${lib} ${DYNAMIC_GRAPH_LIBRARIES})
-		TARGET_LINK_LIBRARIES(${lib} "${Boost_THREAD_LIBRARY}")
-		TARGET_LINK_LIBRARIES(${lib} "${omniORB4_link_FLAGS}")
-		TARGET_LINK_LIBRARIES(${lib} "${${lib}_dependencies}")
+		TARGET_LINK_LIBRARIES(${lib} ${Boost_THREAD_LIBRARY})
+		TARGET_LINK_LIBRARIES(${lib} ${omniORB4_link_FLAGS})
 		TARGET_LINK_LIBRARIES(${lib} "pthread")
 	ENDIF(UNIX)
+	
+	TARGET_LINK_LIBRARIES(${lib} ${${lib}_dependencies})
 		
 	IF(WIN32)
 		SET_TARGET_PROPERTIES(${lib}
