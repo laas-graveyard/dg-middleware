@@ -124,12 +124,22 @@ SET(install_pkg_libdir "\${libdir}")
 SET(install_pkg_datarootdir "\${datarootdir}")
 SET(install_pkg_include_dir "\${includedir}")
 
+SET(libs
+	server-abstract
+	server-command
+	distant-shell
+	exception-dgm)
+	
+FOREACH(lib ${libs})
+	SET(pc-libs "${pc-libs} ${LIBINCL_KW}${lib}${CMAKE_IMPORT_LIBRARY_SUFFIX}")
+ENDFOREACH(lib)
+
 IF(UNIX)
-  SET (${PROJECT_NAME}_LDFLAGS "-Wl,-R${install_pkg_libdir} ${LIBINCL_KW}${PROJECT_NAME}${LIB_EXT} ${${PROJECT_NAME}_LDFLAGS}")
+  SET (${PROJECT_NAME}_LDFLAGS "-Wl,-R${install_pkg_libdir} ${pc-libs} ${${PROJECT_NAME}_LDFLAGS}")
 ENDIF(UNIX)
 
 IF(WIN32)
-  SET (${PROJECT_NAME}_LDFLAGS "${LIBINCL_KW}${PROJECT_NAME}${LIB_EXT} ${${PROJECT_NAME}_LDFLAGS}")
+  SET (${PROJECT_NAME}_LDFLAGS "${pc-libs}")
 ENDIF(WIN32)
 
 # Install the file in the appropriate place.
