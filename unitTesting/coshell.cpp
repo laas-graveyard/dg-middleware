@@ -221,7 +221,7 @@ public:
 	    catch (...)
 	      {
 		std::cerr
-		  << "!!\tException catched when trying to communicate! ... rebind"
+		  << "!!\tException caught when trying to communicate! ... rebind"
 		  << std::endl;
 		serverPtr_ =
 		  CorbaServer::SOT_Server_Command::_narrow

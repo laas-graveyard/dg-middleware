@@ -130,7 +130,12 @@ SET(libs
 	distant-shell
 	exception-dgm)
 	
-FOREACH(lib ${libs})
+SET(libs-to-pc
+	server-command
+	distant-shell
+	exception-dgm)
+	
+FOREACH(lib ${libs-to-pc})
 	SET(pc-libs "${pc-libs} ${LIBINCL_KW}${lib}${CMAKE_IMPORT_LIBRARY_SUFFIX}")
 ENDFOREACH(lib)
 

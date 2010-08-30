@@ -42,10 +42,10 @@ RM = /usr/bin/cmake -E remove -f
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/blue/sot-devel/dg-middleware
+CMAKE_SOURCE_DIR = /home/blue/sot-devel/dgm
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/blue/sot-devel/dg-middleware
+CMAKE_BINARY_DIR = /home/blue/sot-devel/dgm
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -113,14 +113,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/blue/sot-devel/dg-middleware && $(CMAKE_COMMAND) -E cmake_progress_start /home/blue/sot-devel/dg-middleware/CMakeFiles /home/blue/sot-devel/dg-middleware/doc/CMakeFiles/progress.marks
-	cd /home/blue/sot-devel/dg-middleware && $(MAKE) -f CMakeFiles/Makefile2 doc/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/blue/sot-devel/dg-middleware/CMakeFiles 0
+	cd /home/blue/sot-devel/dgm && $(CMAKE_COMMAND) -E cmake_progress_start /home/blue/sot-devel/dgm/CMakeFiles /home/blue/sot-devel/dgm/doc/CMakeFiles/progress.marks
+	cd /home/blue/sot-devel/dgm && $(MAKE) -f CMakeFiles/Makefile2 doc/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/blue/sot-devel/dgm/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/blue/sot-devel/dg-middleware && $(MAKE) -f CMakeFiles/Makefile2 doc/clean
+	cd /home/blue/sot-devel/dgm && $(MAKE) -f CMakeFiles/Makefile2 doc/clean
 .PHONY : clean
 
 # The main clean target
@@ -129,22 +129,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/blue/sot-devel/dg-middleware && $(MAKE) -f CMakeFiles/Makefile2 doc/preinstall
+	cd /home/blue/sot-devel/dgm && $(MAKE) -f CMakeFiles/Makefile2 doc/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/blue/sot-devel/dg-middleware && $(MAKE) -f CMakeFiles/Makefile2 doc/preinstall
+	cd /home/blue/sot-devel/dgm && $(MAKE) -f CMakeFiles/Makefile2 doc/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/blue/sot-devel/dg-middleware && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/blue/sot-devel/dgm && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 doc/CMakeFiles/documentation.dir/rule:
-	cd /home/blue/sot-devel/dg-middleware && $(MAKE) -f CMakeFiles/Makefile2 doc/CMakeFiles/documentation.dir/rule
+	cd /home/blue/sot-devel/dgm && $(MAKE) -f CMakeFiles/Makefile2 doc/CMakeFiles/documentation.dir/rule
 .PHONY : doc/CMakeFiles/documentation.dir/rule
 
 # Convenience name for target.
@@ -153,7 +153,7 @@ documentation: doc/CMakeFiles/documentation.dir/rule
 
 # fast build rule for target.
 documentation/fast:
-	cd /home/blue/sot-devel/dg-middleware && $(MAKE) -f doc/CMakeFiles/documentation.dir/build.make doc/CMakeFiles/documentation.dir/build
+	cd /home/blue/sot-devel/dgm && $(MAKE) -f doc/CMakeFiles/documentation.dir/build.make doc/CMakeFiles/documentation.dir/build
 .PHONY : documentation/fast
 
 # Help Target
@@ -180,6 +180,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/blue/sot-devel/dg-middleware && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/blue/sot-devel/dgm && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

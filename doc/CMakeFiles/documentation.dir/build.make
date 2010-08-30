@@ -38,19 +38,19 @@ RM = /usr/bin/cmake -E remove -f
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/blue/sot-devel/dg-middleware
+CMAKE_SOURCE_DIR = /home/blue/sot-devel/dgm
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/blue/sot-devel/dg-middleware
+CMAKE_BINARY_DIR = /home/blue/sot-devel/dgm
 
 # Utility rule file for documentation.
 
 doc/CMakeFiles/documentation: doc/html/index.html
 
 doc/html/index.html:
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/blue/sot-devel/dg-middleware/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/blue/sot-devel/dgm/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating html/index.html"
-	cd /home/blue/sot-devel/dg-middleware/doc && /usr/bin/doxygen "/home/blue/sot-devel/dg-middleware/doc/package.dox"
+	cd /home/blue/sot-devel/dgm/doc && /usr/bin/doxygen "/home/blue/sot-devel/dgm/doc/package.dox"
 
 documentation: doc/CMakeFiles/documentation
 documentation: doc/html/index.html
@@ -62,10 +62,10 @@ doc/CMakeFiles/documentation.dir/build: documentation
 .PHONY : doc/CMakeFiles/documentation.dir/build
 
 doc/CMakeFiles/documentation.dir/clean:
-	cd /home/blue/sot-devel/dg-middleware/doc && $(CMAKE_COMMAND) -P CMakeFiles/documentation.dir/cmake_clean.cmake
+	cd /home/blue/sot-devel/dgm/doc && $(CMAKE_COMMAND) -P CMakeFiles/documentation.dir/cmake_clean.cmake
 .PHONY : doc/CMakeFiles/documentation.dir/clean
 
 doc/CMakeFiles/documentation.dir/depend:
-	cd /home/blue/sot-devel/dg-middleware && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/blue/sot-devel/dg-middleware /home/blue/sot-devel/dg-middleware/doc /home/blue/sot-devel/dg-middleware /home/blue/sot-devel/dg-middleware/doc /home/blue/sot-devel/dg-middleware/doc/CMakeFiles/documentation.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/blue/sot-devel/dgm && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/blue/sot-devel/dgm /home/blue/sot-devel/dgm/doc /home/blue/sot-devel/dgm /home/blue/sot-devel/dgm/doc /home/blue/sot-devel/dgm/doc/CMakeFiles/documentation.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : doc/CMakeFiles/documentation.dir/depend
 

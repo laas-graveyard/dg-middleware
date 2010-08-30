@@ -207,13 +207,13 @@ SHOW_DIRECTORIES       = NO
 #---------------------------------------------------------------------------
 FILE_PATTERNS          = *.hh *.idl
 EXCLUDE_PATTERNS       = 
-INPUT                  = /home/blue/sot-devel/dg-middleware/include \
-                         /home/blue/sot-devel/dg-middleware/doc/additionalDoc
+INPUT                  = /home/blue/sot-devel/dgm/include \
+                         /home/blue/sot-devel/dgm/doc/additionalDoc
 
 #---------------------------------------------------------------------------
 # configuration options related to inserting images
 #---------------------------------------------------------------------------
-IMAGE_PATH = /home/blue/sot-devel/dg-middleware/doc/figures
+IMAGE_PATH = /home/blue/sot-devel/dgm/doc/figures
 #---------------------------------------------------------------------------
 # configuration options related to source browsing
 #---------------------------------------------------------------------------
@@ -230,9 +230,9 @@ VERBATIM_HEADERS       = NO
 # configuration options related to the HTML output
 #---------------------------------------------------------------------------
 HTML_OUTPUT            = html
-HTML_STYLESHEET        = /home/blue/sot-devel/dg-middleware/doc/package.css
-HTML_HEADER            = /home/blue/sot-devel/dg-middleware/doc/header.html
-HTML_FOOTER            = /home/blue/sot-devel/dg-middleware/doc/footer.html
+HTML_STYLESHEET        = /home/blue/sot-devel/dgm/doc/package.css
+HTML_HEADER            = /home/blue/sot-devel/dgm/doc/header.html
+HTML_FOOTER            = /home/blue/sot-devel/dgm/doc/footer.html
 
 #---------------------------------------------------------------------------
 # configuration options related to the LaTeX output

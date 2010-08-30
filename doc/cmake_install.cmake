@@ -1,4 +1,4 @@
-# Install script for directory: /home/blue/sot-devel/dg-middleware/doc
+# Install script for directory: /home/blue/sot-devel/dgm/doc
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -33,14 +33,14 @@ IF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 ENDIF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  FILE(INSTALL DESTINATION "/home/blue/sot-lib/share/doc/dg-middleware" TYPE DIRECTORY FILES "/home/blue/sot-devel/dg-middleware/doc/html")
+  FILE(INSTALL DESTINATION "/home/blue/sot-lib/share/doc/dg-middleware" TYPE DIRECTORY FILES "/home/blue/sot-devel/dgm/doc/html")
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  FILE(INSTALL DESTINATION "/home/blue/sot-lib/share/doc/dg-middleware/html" TYPE FILE FILES "/home/blue/sot-devel/dg-middleware/doc/dg-middleware.doxytag")
+  FILE(INSTALL DESTINATION "/home/blue/sot-lib/share/doc/dg-middleware/html" TYPE FILE FILES "/home/blue/sot-devel/dgm/doc/dg-middleware.doxytag")
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  FILE(INSTALL DESTINATION "/home/blue/sot-lib/share/doc/dg-middleware/html" TYPE DIRECTORY FILES "/home/blue/sot-devel/dg-middleware/doc/pictures")
+  FILE(INSTALL DESTINATION "/home/blue/sot-lib/share/doc/dg-middleware/html" TYPE DIRECTORY FILES "/home/blue/sot-devel/dgm/doc/pictures")
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 
