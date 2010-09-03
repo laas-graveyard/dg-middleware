@@ -39,8 +39,6 @@
 
 #include "CorbaConnection.h"
 
-// IDL automatically generated file.
-#include <server-command.h>
 #include "connecttoshell.h"
 
 using namespace dynamicgraph;

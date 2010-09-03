@@ -34,7 +34,7 @@
 #include "CorbaConnection.h"
 
 // IDL automatically generated file.
-#include <server-command.h>
+#include <dg-middleware/server-command.h>
 
 #ifndef _CONNECT_TO_SOT_H_
 #define _CONNECT_TO_SOT_H_

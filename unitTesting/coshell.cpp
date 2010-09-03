@@ -42,10 +42,6 @@
 
 using namespace dynamicgraph;
 
-// IDL automatically generated file.
-#include <server-command.h>
-
-
 class coshell__INIT
 {
 public:

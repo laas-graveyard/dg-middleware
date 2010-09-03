@@ -41,7 +41,7 @@
 #include "connecttoshell.h"
 
 // IDL automatically generated file.
-#include <server-command.h>
+#include <dg-middleware/server-command.h>
 
 using namespace dynamicgraph;
 
