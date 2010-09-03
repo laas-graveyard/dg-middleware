@@ -47,9 +47,18 @@ DYNAMICGRAPH_FACTORY_ENTITY_PLUGIN( ServerCommand, "ServerCommand" );
 ServerCommand::
 ServerCommand( const std::string& name )
   :ServerAbstract( name )
+	,synchroSOUT( boost::bind(&ServerCommand::synchroValue,this,_1,_2) ,
+	OneInternalStepS,
+	"ServerCommand("+name+")::output(int)::synchro")
+	,OneInternalStepS(boost::bind(&ServerCommand::OneInternalStep,this,_1,_2) ,
+	jointPositionSIN,
+	"ServerCommand("+name+")::output(int)::onestepinternal")
+	,jointPositionSIN(NULL,"sotPatternGenerator("+name+")::input(vector)::position")
 {
   dgDEBUGIN(15);
-
+  signalRegistration(jointPositionSIN <<
+  		     OneInternalStepS <<
+  		     synchroSOUT);
   dgDEBUGOUT(15);
 }
 
@@ -79,6 +88,12 @@ ServerCommand::
 /* -------------------------------------------------------------------------- */
 /* -------------------------------------------------------------------------- */
 using namespace std;
+
+int & ServerCommand::
+OneInternalStep(int &dummy, int time)
+{
+  return dummy;
+}
 
 void ServerCommand::
 run( const char * cmdCorba ) throw(CORBA::SystemException)
@@ -255,9 +270,29 @@ createInputVectorSignal( const char * signalNameCorba )
   vectorSIN.push_back( newSignal );
   signalRegistration( *newSignal );
 
+  dataStack EmptyStack;
+  vectorSINStored.push_back(EmptyStack);
+
   dgDEBUGOUT(15);
+
+  vectorName2Rank[signalName] = vectorSIN.size()-1;
   /* Return the rank of the new signal in the std::vector. */
   return( vectorSIN.size()-1 );
+}
+
+void ServerCommand::bufferSignal(istringstream & iss)
+{
+  dgDEBUGIN(15);
+  std::string signalName;
+  iss >> signalName;
+
+  unsigned int SizeOfTheBuffer;
+  iss >> SizeOfTheBuffer;
+  dgDEBUG(15) << " " << signalName << ": " <<SizeOfTheBuffer << std::endl;
+  int signalRank = vectorName2Rank[signalName];
+  vectorSINStored[signalRank].stackOfTsData.resize(SizeOfTheBuffer);
+
+  dgDEBUGOUT(15);
 }
 
 void ServerCommand::
@@ -267,18 +302,73 @@ readInputVectorSignal( long int signalRankCorba,
 {
   dgDEBUGIN(15);
 
-  int signalRank = signalRankCorba ;
-  dg::SignalPtr<ml::Vector,int>& signal = *vectorSIN[signalRank];
+	int signalRank = signalRankCorba ;
+	dg::SignalPtr<ml::Vector,int>& signal = *vectorSIN[signalRank];
 
-  const ml::Vector& data = signal.accessCopy();
-  CorbaServer::DoubleSeq_var resCorba( new CorbaServer::DoubleSeq );
-  resCorba->length( data.size() );
-  for( unsigned int i=0;i<data.size();++i ){ resCorba[i]=data(i); }
-  value=resCorba._retn();
+	const ml::Vector& data = signal.accessCopy();
+	CorbaServer::DoubleSeq_var resCorba( new CorbaServer::DoubleSeq );
+	unsigned int lsizeOfSTD = 0;
+	dataStack &aDS = vectorSINStored[signalRank];
+
+	if (!aDS.turnaround)
+	  lsizeOfSTD=aDS.index;
+	else
+	  lsizeOfSTD=aDS.stackOfTsData.size();
+
+	if (lsizeOfSTD==0)
+	  {
+		resCorba->length( data.size() );
+		for( unsigned int i=0;i<data.size();++i ){ resCorba[i]=data(i); }
+	  }
+	else
+	  {
+		resCorba->length( (data.size()+1)*lsizeOfSTD );
+
+		unsigned int lindex = 0;
+
+		for(unsigned int j=0;j<lsizeOfSTD;j++)
+	{
+	  resCorba[lindex++]=aDS.stackOfTsData[j].ts;
+	  for( unsigned int i=0;i<data.size();++i )
+		{ resCorba[lindex++]=aDS.stackOfTsData[j].data[i]; }
+	}
+	  }
+	value=resCorba._retn();
 
   dgDEBUGOUT(15);
 }
 
+void ServerCommand::
+readSeqInputVectorSignal( const CorbaServer::SeqOfRank& signalRanks,
+			  CorbaServer::SeqOfDoubleSeq_out values)
+  throw(CORBA::SystemException)
+{
+  dgDEBUGIN(15);
+
+  CorbaServer::SeqOfDoubleSeq_var aSDS = new CorbaServer::SeqOfDoubleSeq;
+
+  aSDS->length(signalRanks.length());
+
+  for(unsigned int liRank=0;
+      liRank < signalRanks.length();
+      liRank++)
+    {
+      int signalRank = signalRanks[liRank] ;
+      SignalPtr<ml::Vector,int>& signal = *vectorSIN[signalRank];
+
+      const ml::Vector& data = signal.accessCopy();
+      CorbaServer::DoubleSeq  resCorba = aSDS[liRank];
+
+      resCorba.length( data.size() );
+      for( unsigned int i=0;i<data.size();++i )
+	{ resCorba[i]=data(i); }
+
+    }
+  values=aSDS._retn();
+
+  dgDEBUGOUT(15);
+
+}
 
 void ServerCommand::
 writeOutputVectorSignal( long int signalRankCorba,
@@ -312,7 +402,7 @@ registerClient(CorbaServer::NotifyCallback_ptr client,
   CallbackList::iterator iter=callbackList.find(name);
   if( iter!=callbackList.end() )
     {
-      CorbaServer::NotifyCallback_ptr listen = (iter->second);
+	  //      hppCorbaServer::NotifyCallback_ptr listen = (iter->second);
       /* TODO: destroy the previous homonyme if any. */
       //listen->destroy();
       dgDEBUG(1) << "Client " << clientName << " already defined. Rebind." << std::endl;
@@ -322,6 +412,47 @@ registerClient(CorbaServer::NotifyCallback_ptr client,
   dgDEBUGOUT(15);
 }
 
+double & ServerCommand::
+synchroValue(double &aValue, int time)
+{
+  dgDEBUGIN(15);
+  dgDEBUG(15) << "vectorSINStored.size: " << vectorSINStored.size() << " " << endl;
+  OneInternalStepS(time);
+  for(unsigned int i=0;
+      i< vectorSINStored.size();
+      i++)
+    {
+      dataStack & aDS=vectorSINStored[i];
+      int aDSsize = aDS.stackOfTsData.size();
+      dgDEBUG(15) << "aDSsize: " << aDSsize << " " << i << endl;
+      if (aDSsize!=0)
+	{
+	  dgDEBUG(15) << vectorSIN[i] << endl;
+	  SignalPtr<ml::Vector,int>& signal = *vectorSIN[i];
+	  const ml::Vector& data = signal.accessCopy();
+
+	  dgDEBUG(15) << "aDS.index: " << aDS.index <<endl;
+
+	  tsData & aTsData = aDS.stackOfTsData[aDS.index];
+
+	  dgDEBUG(15) << "aTsData.data.size(): " << aTsData.data.size() <<endl;
+	  if (aTsData.data.size()!=data.size())
+	    aTsData.data.resize(data.size());
+
+	  for(unsigned int j=0;j<data.size();j++)
+	    aTsData.data[j] = data(j);
+
+	  aTsData.ts = time *0.005;
+
+	  dgDEBUG(15) << "aTsData.ts: " << aTsData.ts
+		       << " aTsData.size():" << aTsData.data.size()
+		       << endl;
+	  aDS.inc();
+	}
+    }
+  dgDEBUGOUT(15);
+  return aValue;
+}
 
 void ServerCommand::
 unregisterClient(const char * clientName)
@@ -333,7 +464,7 @@ unregisterClient(const char * clientName)
   CallbackList::iterator iter=callbackList.find(name);
   if( iter!=callbackList.end() )
     {
-      CorbaServer::NotifyCallback_ptr listen = (iter->second);
+      //CorbaServer::NotifyCallback_ptr listen = (iter->second);
       /* TODO: free the client reference. */
       //CorbaServer::NotifyCallback_Helper::release(listen);
     }
@@ -436,7 +567,10 @@ commandLine( const std::string& cmdLine,std::istringstream& cmdArgs,
     {
       displayClientList(os);
     }
-
+  else if (cmdLine == "buffer")
+     {
+       bufferSignal(cmdArgs);
+     }
   else
     {
       ServerAbstract::commandLine( cmdLine,cmdArgs,os );

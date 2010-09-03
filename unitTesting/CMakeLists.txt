@@ -29,13 +29,18 @@ SET(test_libs
 	
 SET(tests
 	dummy
+	test_corba_shell)
+SET(test_corba_shell_additional_files connecttoshell.cpp)
+	
+SET(tools
 	coshell)
+SET(coshell_additional_files connecttoshell.cpp)
 	
 FOREACH(test ${test_libs})
 	SET(LIBRARY_NAME ${test})
 	
 	ADD_LIBRARY(${LIBRARY_NAME}
-	  SHARED
+	  STATIC
 	  ${test}.cpp)
 	
 	SET_TARGET_PROPERTIES(${LIBRARY_NAME}
@@ -51,10 +56,11 @@ FOREACH(test ${test_libs})
 ENDFOREACH(test)
 
 FOREACH(test ${tests})
-	SET(EXECUTABLE_NAME ${test}_exe)
+	SET(EXECUTABLE_NAME ${test})
 	
 	ADD_EXECUTABLE(${EXECUTABLE_NAME}
-	  ${test}.cpp)
+	  ${test}.cpp
+	  ${${test}_additional_files})
 	
 	SET_TARGET_PROPERTIES(${EXECUTABLE_NAME}
 		PROPERTIES
@@ -67,4 +73,27 @@ FOREACH(test ${tests})
 	  ${test_libs})
 	
 	TARGET_LINK_LIBRARIES(${EXECUTABLE_NAME} ${DYNAMIC_GRAPH_LIBRARIES})
+	
+	ADD_TEST(${test} ${test})
 ENDFOREACH(test)
+
+FOREACH(tool ${tools})
+	SET(EXECUTABLE_NAME ${tool})
+	
+	ADD_EXECUTABLE(${EXECUTABLE_NAME}
+	  ${tool}.cpp
+	  ${${tool}_additional_files})
+	
+	SET_TARGET_PROPERTIES(${EXECUTABLE_NAME}
+		PROPERTIES
+		LINK_FLAGS "${${PROJECT_NAME}_src_LDFLAGS} ${omniORB4_link_FLAGS} -lboost_program_options-mt")
+	
+	TARGET_LINK_LIBRARIES(${EXECUTABLE_NAME}
+	  server-command
+	  server-abstract
+	  ${BOOST_THREAD_LIB_NAME}
+	  ${test_libs})
+	
+	TARGET_LINK_LIBRARIES(${EXECUTABLE_NAME} ${DYNAMIC_GRAPH_LIBRARIES} CorbaConnection)
+	INSTALL(TARGETS ${EXECUTABLE_NAME} DESTINATION bin)
+ENDFOREACH(tool)

@@ -4,6 +4,10 @@ module CorbaServer
   typedef sequence<double> DoubleSeq;
   typedef sequence<char> StringStreamer;
 
+  typedef sequence<DoubleSeq> SeqOfDoubleSeq;
+  typedef sequence<StringStreamer> SeqOfStringStreamer;
+  typedef sequence<long> SeqOfRank;
+
   interface NotifyCallback{
     //oneway
     void notifyClient();
@@ -18,6 +22,7 @@ module CorbaServer
     long createOutputVectorSignal( in string signalNameCorba );
     long createInputVectorSignal( in string signalNameCorba );
     void readInputVectorSignal( in long signalRank, out DoubleSeq value );
+    void readSeqInputVectorSignal( in SeqOfRank signalRanks, out SeqOfDoubleSeq values );
     void writeOutputVectorSignal( in long signalRank, in DoubleSeq value );
 
     // RegisterCallback
