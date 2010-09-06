@@ -2,8 +2,6 @@
 #  Copyright 
 # 
 
-INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/include)
-
 ADD_DEFINITIONS(-DDEBUG=2)
 
 IF(UNIX)
@@ -36,7 +34,6 @@ SET(CORBA_AUTOMATIC_DIRECTORY ${${PROJECT_NAME}_BINARY_DIR}/stubs)
 
   SET(ServerCommand_CPP "${CORBA_AUTOMATIC_DIRECTORY}/server-command-corbaSK.cc")
   SET(ServerCommand_Header "${CORBA_AUTOMATIC_DIRECTORY}/server-command-corba.h")
-  #SET (sotServerAbstract_plugins_link_flags "${BOOST_THREAD_LIB_NAME}")
 
   SET(IDL_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME}")
 
