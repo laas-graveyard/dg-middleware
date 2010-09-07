@@ -27,8 +27,6 @@
 /* --- CORBA --- */
 #include <omniORB4/CORBA.h>
 
-#define VP_DEBUG
-#define VP_DEBUG_MODE 45
 #include <dynamic-graph/debug.h>
 
 /* --- SOT --- */
