@@ -42,12 +42,11 @@ FOREACH(test ${test_libs})
 	
 	SET_TARGET_PROPERTIES(${LIBRARY_NAME}
 		PROPERTIES
-		LINK_FLAGS "${${PROJECT_NAME}_src_LDFLAGS} ${omniORB4_link_FLAGS} -lboost_program_options-mt")
+		LINK_FLAGS "${${PROJECT_NAME}_src_LDFLAGS} ${omniORB4_link_FLAGS}")
 	
 	TARGET_LINK_LIBRARIES(${LIBRARY_NAME}
 	  server-command
-	  server-abstract
-	  ${BOOST_THREAD_LIB_NAME})
+	  server-abstract)
 	
 	TARGET_LINK_LIBRARIES(${LIBRARY_NAME} ${DYNAMIC_GRAPH_LIBRARIES})
 ENDFOREACH(test)
@@ -61,12 +60,11 @@ FOREACH(test ${tests})
 	
 	SET_TARGET_PROPERTIES(${EXECUTABLE_NAME}
 		PROPERTIES
-		LINK_FLAGS "${${PROJECT_NAME}_src_LDFLAGS} ${omniORB4_link_FLAGS} -lboost_program_options-mt")
+		LINK_FLAGS "${${PROJECT_NAME}_src_LDFLAGS} ${omniORB4_link_FLAGS}")
 	
 	TARGET_LINK_LIBRARIES(${EXECUTABLE_NAME}
 	  server-command
 	  server-abstract
-	  ${BOOST_THREAD_LIB_NAME}
 	  ${test_libs})
 	
 	TARGET_LINK_LIBRARIES(${EXECUTABLE_NAME} ${DYNAMIC_GRAPH_LIBRARIES})
@@ -83,15 +81,12 @@ FOREACH(tool ${tools})
 	
 	SET_TARGET_PROPERTIES(${EXECUTABLE_NAME}
 		PROPERTIES
-		LINK_FLAGS "${${PROJECT_NAME}_src_LDFLAGS} ${omniORB4_link_FLAGS} -lboost_program_options-mt")
+		LINK_FLAGS "${${PROJECT_NAME}_src_LDFLAGS} ${omniORB4_link_FLAGS}")
 	
 	TARGET_LINK_LIBRARIES(${EXECUTABLE_NAME}
 	  server-command
 	  server-abstract
-	  ${BOOST_THREAD_LIB_NAME}
 	  ${test_libs})
-	
-	MESSAGE("boost libs are  ${BOOST_PROGRAM_OPTIONS_LIB_NAME}")
 	
 	TARGET_LINK_LIBRARIES(${EXECUTABLE_NAME} ${DYNAMIC_GRAPH_LIBRARIES} CorbaConnection)
 	INSTALL(TARGETS ${EXECUTABLE_NAME} DESTINATION bin/sot)
