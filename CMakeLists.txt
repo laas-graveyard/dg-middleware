@@ -37,7 +37,7 @@ SET(PACKAGE_REQUIREMENTS "")
 
 # --- BOOST ---------------------------------------------------
 SET(Boost_THREAD_FOUND 0)
-FIND_PACKAGE(Boost 1.41 COMPONENTS thread program_options)
+FIND_PACKAGE(Boost 1.41 COMPONENTS thread program_options REQUIRED)
 IF(Boost_THREAD_FOUND)
   #MESSAGE(STATUS "Boost_THREAD_LIBRARY:" ${Boost_THREAD_LIBRARY})
   #MESSAGE(STATUS "Boost_THREAD_LIBRARY_RELEASE:" ${Boost_THREAD_LIBRARY_RELEASE})
