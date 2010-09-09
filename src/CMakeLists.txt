@@ -11,6 +11,9 @@ ENDIF(UNIX)
 # provide path to library libdynamic-graph.so
 LINK_DIRECTORIES(${DYNAMIC_GRAPH_LIBRARY_DIRS})
 
+# The main include dir
+INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/include)
+
 # Add dynamic-graph compilation flags and link to library libdynamic-graph.so
 ADD_DEFINITIONS(${DYNAMIC_GRAPH_CFLAGS})
 
