@@ -95,8 +95,20 @@ ConnectToShell::ConnectToShell (int argc, char* argv[])
 				    nameServicePort);
   
   dgDEBUG(15) << "Connection [OK]. Cast ... " << std::endl;
-  serverPtr_ =
-    CorbaServer::SOT_Server_Command::_narrow (corba_obj);
+  try
+    {
+      serverPtr_ =
+	CorbaServer::SOT_Server_Command::_narrow (corba_obj);
+    }
+  catch (CORBA::TRANSIENT& exception)
+    {
+      std::cerr << "Failed to connect to the stack of tasks." << std::endl
+		<< "1. Double check that the server is started." << std::endl
+		<< "2. Does the server and client version match?" << std::endl
+		<< std::endl
+		<< "Minor code: " << exception.minor () << std::endl;
+      throw;
+    }
   
   if(CORBA::is_nil (serverPtr_))
     throw std::runtime_error ("Failed to connect to the server.");

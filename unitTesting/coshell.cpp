@@ -148,6 +148,14 @@ int main (int argc, char* argv[])
       std::cerr << error.what () << std::endl;
       return 1;
     }
+  catch(CORBA::Exception& exception)
+    {
+      boost::format fmt
+	("A CORBA exception has been raised (exception name: ``%1%'').");
+      fmt % exception._name ();
+      std::cerr << fmt.str () << std::endl;
+      return 1;
+    }
   catch (...)
     {
       std::cerr
