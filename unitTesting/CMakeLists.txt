@@ -73,7 +73,7 @@ FOREACH(test ${tests})
 ENDFOREACH(test)
 
 FOREACH(tool ${tools})
-	SET(EXECUTABLE_NAME ${tool})
+	SET(EXECUTABLE_NAME dg-${tool})
 	
 	ADD_EXECUTABLE(${EXECUTABLE_NAME}
 	  ${tool}.cpp
