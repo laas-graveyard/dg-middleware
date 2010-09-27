@@ -1,0 +1,70 @@
+=head1 NAME
+
+dg-coshell - Stack of tasks CORBA client shell
+
+=head1 SYNOPSIS
+
+dg-coshell [options]
+
+=head1 DESCRIPTION
+
+The stack of tasks can work in two different ways. It can be launched
+as an interactive process (mainly for simulation purpose) through
+dg-shell or it can be a part of a larger control framework. In that
+case, the process is rarely interactive. In the latter case,
+dg-coshell can be used to open a remote shell.
+
+CORBA connects to a service in two steps. First, it searches for a
+name service aware of the location of a coshell CORBA service. By
+default, it connects to the InitRef defined by the omniORB
+configuration file. To override this behavior, one can use set a
+hostname and/or a port to connect to. If a host name is set but no
+port has been specified, it will use the default port (2809).  The
+name and kind of the coshell service can also be overriden to support
+non-standard naming scheme. It can be useful, for instance, if two
+stack of stacks instances have to run simultaneously on the same host.
+Once this information are retrieved, the second step is to connect to
+the coshell service and start the data exchange.
+
+Please, see the stack of tasks and omniORB documentation for more
+information.
+
+=head1 OPTIONS
+
+B<-c> I<name>, B<--sot-service-name> I<name>
+	CORBA service name (`coshell' by default)
+
+B<-k> I<kind>, B<--sot-service-kind> I<kind>
+	CORBA servive kind (`servant' by default)
+
+B<-r> I<host>, B<--name-service-host> I<host>
+        hostname used to connect to the CORBA name service
+
+B<-p> I<port>, B<--name-service-port> I<port>
+        port used to connect to the CORBA name service
+
+B<-h>, B<--help>
+	produce help message
+
+
+=head1 EXAMPLES
+
+If omniORB is properly configured, no options are required:
+
+          dg-coshell
+
+
+However, the lack of history and I/O control can be annoying, rlwrap
+can be used to work around dg-coshell's limitations:
+
+          rlwrap dg-coshell
+
+
+=head1 AUTHORS
+
+This software has been developed at CNRS/AIST and LAAS-CNRS laboratories.
+See </usr/share/doc/dg-middleware/AUTHORS> to see the list of all contributors.
+
+=head1 SEE ALSO
+
+See also <http://github.com/jrl-umi3218> for additional resources.
