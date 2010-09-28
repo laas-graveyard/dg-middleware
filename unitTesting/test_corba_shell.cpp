@@ -1,26 +1,21 @@
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- * Copyright (c) JRL-JAPAN, Tsukuba, 2010
- *+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/*
+ * Copyright 2010,
+ * François Bleibel,
  *
- * File:      test_corba_shell.cc
- * Project:   SOT
- * Author:    O. Stasse
- *            N. Mansard 
- *            T. Foissotte
+ * CNRS/AIST
  *
- * Version control
- * ===============
- *
- *  $Id$
- *
- * Description
- * ============
- *
- *  Connection to a sotServerCommand and test setting and reading
- *  of stored signals.
- *
- * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
+ * This file is part of dg-middleware.
+ * dg-middleware is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public License
+ * as published by the Free Software Foundation, either version 3 of
+ * the License, or (at your option) any later version.
+ * dg-middleware is distributed in the hope that it will be
+ * useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+ * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.  You should
+ * have received a copy of the GNU Lesser General Public License along
+ * with dg-middleware.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include <cassert>
 #include <cstdlib>
@@ -74,7 +69,7 @@ public:
 	catch (...)
 	  {
 	    std::cerr
-	      << "!!\tException catched when trying to send:" 
+	      << "!!\tException catched when trying to send:"
 	      << buffer
 	      << "! \n... rebind"
 	      << std::endl;
@@ -102,7 +97,7 @@ public:
     serverPtr_->registerClient (client, CLIENT_NAME);
 
     CorbaServer::StringStreamer_var output;
-    
+
     long int lIVS=0;
 
     if (!CORBA::is_nil (serverPtr_))
@@ -122,7 +117,7 @@ public:
     buffer = "coshell.buffer comstate 30";
     sendBuffer(buffer);
     std::cout << "Send " << buffer << " command " << std::endl;
-    
+
     buffer = "OpenHRP.periodicCall addSignal coshell.synchro";
     sendBuffer(buffer);
     std::cout << "Send " << buffer << " command " << std::endl;
@@ -144,7 +139,7 @@ public:
 	    exit(-1);
 	  }
       }
-    
+
     std::cout << "Data to read: " << bufferOfValues->length() <<std::endl;
     sleep(1);
     for(unsigned int i=0;i<bufferOfValues->length();i++)

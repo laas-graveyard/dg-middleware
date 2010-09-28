@@ -1,20 +1,21 @@
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- * Copyright (c) JRL-JAPAN, Tsukuba, 2010
- *+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/*
+ * Copyright 2010,
+ * François Bleibel,
  *
- * File:      connecttosot.h
- * Project:   SOT
- * Authors:   O. Stasse, 
- *            N. Mansard
- *            T. Foissotte 
+ * CNRS/AIST
  *
- * Description
- * ============
- *
- *  This class provides means to connect to the entity coshell
- *  implementing a corba server in the Stack of Tasks.
- *
- * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+ * This file is part of dg-middleware.
+ * dg-middleware is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public License
+ * as published by the Free Software Foundation, either version 3 of
+ * the License, or (at your option) any later version.
+ * dg-middleware is distributed in the hope that it will be
+ * useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+ * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.  You should
+ * have received a copy of the GNU Lesser General Public License along
+ * with dg-middleware.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include <cassert>
 #include <cstdlib>
@@ -101,7 +102,7 @@ class ConnectToShell
 	ConnectToShell (int argc, char* argv[]);
   ~ConnectToShell (){};
   virtual int run ()=0;
-  
+
  protected:
   CorbaServer::SOT_Server_Command_var serverPtr_;
   CorbaConnection connection_;
