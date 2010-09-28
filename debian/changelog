@@ -1,3 +1,9 @@
+dg-middleware (1.0.0.99-3) lucid; urgency=low
+
+  * Add libjrl-mal-dev as build requirement.
+
+ -- Thomas Moulard <thomas.moulard@gmail.com>  Wed, 28 Sep 2010 13:31:00 +0200
+
 dg-middleware (1.0.0.99-2) lucid; urgency=low
 
   * Add libboost-program-options-dev as build requirement.
