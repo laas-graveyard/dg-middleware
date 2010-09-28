@@ -8,6 +8,7 @@ Build-Depends: debhelper (>= 7.0.50~), cmake (>= 2.6),
 	       libomniorb4-dev (>= 4.1.2),
 	       libboost-dev (>= 1.33.1),
 	       libboost-thread-dev (>= 1.33.1),
+	       libboost-program-options-dev  (>= 1.33.1)
 	       libdynamic-graph-dev (>= 1.0.0.99)
 Standards-Version: 3.8.4
 #Vcs-Git:

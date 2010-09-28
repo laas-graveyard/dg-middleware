@@ -1,3 +1,9 @@
+dg-middleware (1.0.0.99-2) lucid; urgency=low
+
+  * Add libboost-program-options-dev as build requirement.
+
+ -- Thomas Moulard <thomas.moulard@gmail.com>  Wed, 28 Sep 2010 13:16:00 +0200
+
 dg-middleware (1.0.0.99-1) lucid; urgency=low
 
   * Initial work.
