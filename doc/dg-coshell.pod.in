@@ -20,7 +20,7 @@ default, it connects to the InitRef defined by the omniORB
 configuration file. To override this behavior, one can use set a
 hostname and/or a port to connect to. If a host name is set but no
 port has been specified, it will use the default port (2809).  The
-name and kind of the coshell service can also be overriden to support
+name and kind of the coshell service can also be overridden to support
 non-standard naming scheme. It can be useful, for instance, if two
 stack of stacks instances have to run simultaneously on the same host.
 Once this information are retrieved, the second step is to connect to
