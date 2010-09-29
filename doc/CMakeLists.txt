@@ -41,13 +41,14 @@ INSTALL(DIRECTORY pictures DESTINATION ${HTMLDIR})
 
 
 # Man page generation.
+FIND_PROGRAM(POD2MAN pod2man)
 CONFIGURE_FILE(dg-coshell.pod.in dg-coshell.pod @ONLY)
 
 ADD_CUSTOM_COMMAND(
   OUTPUT dg-coshell.1
-  COMMAND pod2man --section=1
-                  --center="LOCAL USER COMMANDS"
-                  --release ${PROJECT_NAME} dg-coshell.pod
+  COMMAND ${POD2MAN} --section=1
+                     --center="LOCAL USER COMMANDS"
+                     --release ${PROJECT_NAME} dg-coshell.pod
           > dg-coshell.1
   DEPENDS ${BUILD_DIR}/dg-coshell.pod)
 
