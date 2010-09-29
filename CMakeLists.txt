@@ -15,10 +15,15 @@
 
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
+# Meta-information.
 SET(PROJECT_NAME dg-middleware)
-project(${PROJECT_NAME})
-
 SET(PROJECT_VERSION 1.0.0.99)
+SET(PROJECT_DESCRIPTION "Dynamic graph distributed computation and control")
+SET(PROJECT_URL "http://github.com/jrl-umi3218")
+
+project(${PROJECT_NAME} CXX)
+
+
 
 SET(CMAKE_VERBOSE_MAKEFILE true)
 

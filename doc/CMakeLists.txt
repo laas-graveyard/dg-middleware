@@ -1,32 +1,59 @@
-# 
-#  Copyright 
-# 
+# Copyright 2010, François Bleibel, JRL, CNRS/AIST
+#
+# This file is part of dg-middleware.
+# dg-middleware is free software: you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public License
+# as published by the Free Software Foundation, either version 3 of
+# the License, or (at your option) any later version.
+#
+# dg-middleware is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Lesser Public License for more details.  You should have
+# received a copy of the GNU Lesser General Public License along with
+# dg-middleware. If not, see <http://www.gnu.org/licenses/>.
 
-# Configure package.dox file
-CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/package.dox.cmake
-  ${CMAKE_CURRENT_BINARY_DIR}/package.dox
+SET(BUILD_DIR ${CMAKE_BINARY_DIR}/doc)
+
+SET(DOCDIR share/doc/${PROJECT_NAME})
+SET(HTMLDIR ${DOCDIR}/html)
+
+# Add `doc' target.
+ADD_CUSTOM_TARGET(
+  doc ALL
+  DEPENDS html/index.html dg-coshell.1.gz)
+
+
+# Generate Doxygen configuration file.
+CONFIGURE_FILE(package.dox.cmake package.dox)
+
+# Generating the Doxygen documentation
+ADD_CUSTOM_COMMAND(
+  OUTPUT html/index.html
+  COMMAND ${DOXYGEN_EXECUTABLE} package.dox
+  COMMENT Generating Doxygen documentation
 )
 
+# Doxygen documentation installation rules.
+INSTALL(DIRECTORY ${BUILD_DIR}/html DESTINATION ${DOCDIR})
+INSTALL(FILES ${BUILD_DIR}/${PROJECT_NAME}.doxytag DESTINATION ${HTMLDIR})
+INSTALL(DIRECTORY pictures DESTINATION ${HTMLDIR})
 
-ADD_CUSTOM_COMMAND(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/html/index.html
-  COMMAND ${DOXYGEN_EXECUTABLE} \"${CMAKE_CURRENT_BINARY_DIR}/package.dox\"
-)
 
-ADD_CUSTOM_TARGET(documentation ALL
-  DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/html/index.html)
+# Man page generation.
+CONFIGURE_FILE(dg-coshell.pod.in dg-coshell.pod @ONLY)
 
-#
-# Install html documentation
-#
+ADD_CUSTOM_COMMAND(
+  OUTPUT dg-coshell.1
+  COMMAND pod2man --section=1
+                  --center="LOCAL USER COMMANDS"
+                  --release ${PROJECT_NAME} dg-coshell.pod
+          > dg-coshell.1
+  DEPENDS ${BUILD_DIR}/dg-coshell.pod)
 
-# html files
-INSTALL(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/html
-  DESTINATION share/doc/${PROJECT_NAME})
+ADD_CUSTOM_COMMAND(
+  OUTPUT dg-coshell.1.gz
+  COMMAND gzip -c dg-coshell.1 > dg-coshell.1.gz
+  DEPENDS ${BUILD_DIR}/dg-coshell.1)
 
-# doxytag
-INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.doxytag
-  DESTINATION share/doc/${PROJECT_NAME}/html)
-
-# pictures
-INSTALL(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/pictures
-  DESTINATION share/doc/${PROJECT_NAME}/html)
+INSTALL(FILES ${BUILD_DIR}/dg-coshell.1.gz DESTINATION share/man/man1)

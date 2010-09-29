@@ -63,8 +63,11 @@ can be used to work around dg-coshell's limitations:
 =head1 AUTHORS
 
 This software has been developed at CNRS/AIST and LAAS-CNRS laboratories.
-See </usr/share/doc/dg-middleware/AUTHORS> to see the list of all contributors.
+
+See <@CMAKE_INSTALL_PREFIX@/share/doc/libdg-middleware-dev/AUTHORS> to
+see the list of all contributors.
+
 
 =head1 SEE ALSO
 
-See also <http://github.com/jrl-umi3218> for additional resources.
+See also <@PROJECT_URL@> for additional resources.
