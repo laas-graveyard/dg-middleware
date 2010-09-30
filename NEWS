@@ -1,4 +1,57 @@
-                                                                -*- outline -*-
+New in version 1.1 - 2010/09/30
+      Initialized git repository
+      Added project code.
+      Added compilation option -pthread for unix.
+      Added tests and coshell.
+      Added distant shell plugin
+      Added link to boost thread
+      Added definition of HAVE_LIBBOOST_THREAD
+      Added lots of missing libraries for link.
+      Reorganized libraries.
+      Added exception dg-middleware.     Removed reference to sot-core.
+      Changed the lib names listed in the .pc
+      Corrected typo in coshell     Corrected wrong link libraries being output to the .pc file.
+      Removed CMAKE_INSTALL_PREFIX in INSTALL directive.
+      Ported Olivier's StackOfTask commit d0c818d915cc1c3e15 and 7f2a0f265ef7071.
+      Corrected wrong include paths.
+      Changed location of coshell executable.
+      Modified include directories.
+      Forced boost version to 1.41 (for boost::thread)
+      Made boost components required.
+      Simplified the use of boost in cmake.
+      Added missing include directory for source headers.
+      Added uninstall target. Started documentation.
+      Merge branch 'master' of git+ssh://softs.laas.fr/git/jrl/frameworks/dg-middleware
+      Added forgtten file cmake uninstall.
+      Added (succint) documentation for dg-middleware.
+      Install idl file server-command.idl into share/
+      Changed install path of coshell executable. Also updated documentation.
+      Simplified looking for boost libraries (trust pkg-config)
+      Remove unnecessary file common.idl.
+      Make CORBA errors more explicit in coshell.
+      Rename coshell into dg-coshell.
+      Add man page for dg-coshell.
+      Rename man page to allow CMake generation.
+      Merge INSTALL and README into the new Markdown-enabled README.md file
+      Rewrite AUTHORS file.
+      Rewrite NEWS file.
+      Add LGPL-3 license header.
+      Add LGPL-3 license.
+      Set version number to 1.0.0.99
+      Debianize package.
+      Add omniorb4 to build requirements of the Debian package.
+      Add omniidl to build requirements.
+      Fix package as no shared library is installed by this package (only plug-in).
+      Fix Debian package.
+      Add libboost-program-options-dev as build requirement.
+      Fix typo in Debian control file.
+      Add libjrl-maldev as build requirement.
+      Add generation and installation rules for man pages.
+      Suggest rlwrap and recommends omniidl in the Debian package.
+      Merge branch 'master' of ssh://softs.laas.fr/git/jrl/frameworks/dg-middleware
+      Fix typo in man page.
+      Install man page in Debian package.
+      Add perl to build requirements (for man page generation).
+      Search for pod2man properly.
+      Enhance man page.
 
-New in X.Y, XXXX-YY-ZZ:
-* Initial release.
