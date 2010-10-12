@@ -25,12 +25,12 @@ ADD_CUSTOM_TARGET(
 
 
 # Generate Doxygen configuration file.
-CONFIGURE_FILE(package.dox.cmake package.dox)
+CONFIGURE_FILE(package.dox.cmake ${BUILD_DIR}/package.dox)
 
 # Generating the Doxygen documentation
 ADD_CUSTOM_COMMAND(
   OUTPUT html/index.html
-  COMMAND ${DOXYGEN_EXECUTABLE} package.dox
+  COMMAND ${DOXYGEN_EXECUTABLE} ${BUILD_DIR}/package.dox
   COMMENT Generating Doxygen documentation
 )
 
@@ -42,7 +42,7 @@ INSTALL(DIRECTORY pictures DESTINATION ${HTMLDIR})
 
 # Man page generation.
 FIND_PROGRAM(POD2MAN pod2man)
-CONFIGURE_FILE(dg-coshell.pod.in dg-coshell.pod @ONLY)
+CONFIGURE_FILE(dg-coshell.pod.in ${BUILD_DIR}/dg-coshell.pod @ONLY)
 
 ADD_CUSTOM_COMMAND(
   OUTPUT dg-coshell.1
