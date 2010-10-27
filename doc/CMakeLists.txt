@@ -16,12 +16,12 @@
 SET(BUILD_DIR ${CMAKE_BINARY_DIR}/doc)
 
 SET(DOCDIR share/doc/${PROJECT_NAME})
-SET(HTMLDIR ${DOCDIR}/html)
+SET(HTMLDIR ${DOCDIR}/doxygen-html)
 
 # Add `doc' target.
 ADD_CUSTOM_TARGET(
   doc ALL
-  DEPENDS html/index.html dg-coshell.1.gz)
+  DEPENDS doxygen-html/index.html dg-coshell.1.gz)
 
 
 # Generate Doxygen configuration file.
@@ -29,13 +29,13 @@ CONFIGURE_FILE(package.dox.cmake ${BUILD_DIR}/package.dox)
 
 # Generating the Doxygen documentation
 ADD_CUSTOM_COMMAND(
-  OUTPUT html/index.html
+  OUTPUT doxygen-html/index.html
   COMMAND ${DOXYGEN_EXECUTABLE} ${BUILD_DIR}/package.dox
   COMMENT Generating Doxygen documentation
 )
 
 # Doxygen documentation installation rules.
-INSTALL(DIRECTORY ${BUILD_DIR}/html DESTINATION ${DOCDIR})
+INSTALL(DIRECTORY ${BUILD_DIR}/doxygen-html DESTINATION ${DOCDIR})
 INSTALL(FILES ${BUILD_DIR}/${PROJECT_NAME}.doxytag DESTINATION ${HTMLDIR})
 INSTALL(DIRECTORY pictures DESTINATION ${HTMLDIR})
 
