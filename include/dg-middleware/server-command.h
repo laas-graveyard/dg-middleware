@@ -30,7 +30,7 @@
 #include <dynamic-graph/signal-time-dependent.h>
 
 /* --- CORBA IDL --- */
-#include <server-command-corba.h>
+#include "server-command-corba.hh"
 
 /* --- BOOST --- */
 #ifdef HAVE_LIBBOOST_THREAD

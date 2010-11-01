@@ -18,66 +18,38 @@
  */
 
 #ifndef __DGM_EXCEPTION_H
-#define __DGM_EXCEPTION_H
-
-/* --------------------------------------------------------------------- */
-/* --- INCLUDE --------------------------------------------------------- */
-/* --------------------------------------------------------------------- */
-
-
-#include <dynamic-graph/exception-abstract.h>
-
-/* --------------------------------------------------------------------- */
-/* --- API ------------------------------------------------------------- */
-/* --------------------------------------------------------------------- */
-
-#if defined (WIN32)
-#  if defined (exception_dgm_EXPORTS)
-#    define DGM_EXPORT __declspec(dllexport)
-#  else
-#    define DGM_EXPORT __declspec(dllimport)
-#  endif
-#else
-#  define DGM_EXPORT
-#endif
-
-
-/* --------------------------------------------------------------------- */
-/* --- CLASS ----------------------------------------------------------- */
-/* --------------------------------------------------------------------- */
+# define __DGM_EXCEPTION_H
+# include <dynamic-graph/exception-abstract.h>
+# include <dg-middleware/config.hh>
 
 namespace dynamicgraph {
 
-/* \class ExceptionDgMiddleware
- */
-class DGM_EXPORT ExceptionDgMiddleware
-:public ExceptionAbstract
-
-{
- public:
-  enum ErrorCodeEnum
+  /* \class ExceptionDgMiddleware
+   */
+  class DG_MIDDLEWARE_DLLAPI ExceptionDgMiddleware : public ExceptionAbstract
+  {
+  public:
+    enum ErrorCodeEnum
     {
       GENERIC = ExceptionAbstract::TOOLS
       ,CORBA
     };
 
-  static const std::string EXCEPTION_NAME;
-  virtual const std::string& getExceptionName( void ) const { return EXCEPTION_NAME; }
+    static const std::string EXCEPTION_NAME;
+    virtual const std::string& getExceptionName( void ) const
+    { return EXCEPTION_NAME; }
 
-public:
+  public:
 
-  ExceptionDgMiddleware ( const ExceptionDgMiddleware::ErrorCodeEnum& errcode,
-		       const std::string & msg = "" );
-  ExceptionDgMiddleware( const ExceptionDgMiddleware::ErrorCodeEnum& errcode,
-			const std::string & msg,const char* format, ... );
-  virtual ~ExceptionDgMiddleware( void ) throw() {};
+    ExceptionDgMiddleware ( const ExceptionDgMiddleware::ErrorCodeEnum& errcode,
+			    const std::string & msg = "" );
+    ExceptionDgMiddleware( const ExceptionDgMiddleware::ErrorCodeEnum& errcode,
+			   const std::string & msg,const char* format, ... );
+    virtual ~ExceptionDgMiddleware( void ) throw() {};
 
 
-};
-
+  };
 } // namespace
-
-
 
 #endif /* #ifndef __DGM_EXCEPTION_H */
 

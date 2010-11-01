@@ -32,7 +32,7 @@ DistantShell::
 {
   dgDEBUGIN(5);
   endLoop = true;
-  
+
 #ifdef HAVE_LIBBOOST_THREAD
   threadLoop->join();
 #endif
@@ -54,7 +54,7 @@ loop( const int lat )
 	  while( filein.ready() )
 	    {
 	      std::istringstream iss( filein.next() );
-	      std::string cmdLine; 
+	      std::string cmdLine;
 	      dgDEBUG(35) << cmdLine << std::endl;
 	      iss>>cmdLine;
 	      shell.cmd( cmdLine,iss,os );
@@ -62,14 +62,14 @@ loop( const int lat )
 	}
 #ifndef WIN32
 	usleep( lat*1000 );
-#else	  
+#else
 	Sleep(lat);
 #endif
     }
   dgDEBUGOUT(15);
 }
 
-void* 
+void*
 __staticLoop( void* autoref )
 {
   DistantShell* ref = static_cast<DistantShell *>( autoref );
@@ -91,7 +91,7 @@ loopInThread( void )
   #ifndef WIN32
   #warning Unable to compile with libboost_thread
   #else
-  #pragma message ( "Unable to compile with libboost_thread\n" ) 
+  #pragma message ( "Unable to compile with libboost_thread\n" )
   #endif
   dgDEBUG(5) << "No boost:thread. Unable to launch in thread." <<std::endl;
 #endif
@@ -133,7 +133,7 @@ commandLine( const std::string& cmdLine,
 
   dgDEBUGIN(15) << "CMD = " << cmdLine <<endl;
 
-  if( cmdLine == "help") 
+  if( cmdLine == "help")
     {
       os << "distant shell: "<<endl
 	 << "  - open <file>" << endl
@@ -143,7 +143,7 @@ commandLine( const std::string& cmdLine,
     }
   else if( cmdLine == "open" )
     {
-      std::string f; cmdArgs >> f; 
+      std::string f; cmdArgs >> f;
       dshell.inputFile(f);
     }
   else if( cmdLine == "start" )
@@ -161,7 +161,7 @@ commandLine( const std::string& cmdLine,
     }
   else
     Entity::commandLine( cmdLine,cmdArgs,os );
-  
+
   dgDEBUGOUT(15);
 
 }

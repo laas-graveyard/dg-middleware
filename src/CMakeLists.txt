@@ -13,98 +13,81 @@
 # received a copy of the GNU Lesser General Public License along with
 # dg-middleware. If not, see <http://www.gnu.org/licenses/>.
 
+# Relative plug-in directory (i.e. lib/plugin for instance)
+# as exposed by the dynamic-graph pkg-config file.
+SET(PLUGINDIR ${DYNAMIC_GRAPH_PLUGINDIRNAME})
+SET(FULLPLUGINDIR ${CMAKE_INSTALL_PREFIX}/${PLUGINDIR})
+
+INCLUDE(../cmake/idl.cmake)
+
+# Declare that dynamic-graph shared library is being built.
+ADD_DEFINITIONS(-DBUILDING_DG_MIDDLEWARE)
+
 ADD_DEFINITIONS(-DDEBUG=2)
 
-IF(UNIX)
-	ADD_DEFINITIONS(-pthread)
-ENDIF(UNIX)
+# Make sure the generated CORBA headers will be found.
+INCLUDE_DIRECTORIES(${CMAKE_BINARY_DIR}/src)
 
-# provide path to library libdynamic-graph.so
+# Use dynamic-graph.
+ADD_DEFINITIONS(${DYNAMIC_GRAPH_CFLAGS})
 LINK_DIRECTORIES(${DYNAMIC_GRAPH_LIBRARY_DIRS})
 
-# The main include dir
-INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/include)
+# Use omniORB4.
+ADD_DEFINITIONS(${OMNIORB4_CFLAGS})
+LINK_DIRECTORIES(${OMNIORB4_LIBRARY_DIRS})
 
-# Add dynamic-graph compilation flags and link to library libdynamic-graph.so
-ADD_DEFINITIONS(${DYNAMIC_GRAPH_CFLAGS})
-
-IF(WIN32)
-foreach(dlink ${DYNAMIC_GRAPH_LDFLAGS} ${omniORB4_link_FLAGS})
-	SET ( ${PROJECT_NAME}_src_LDFLAGS "${${PROJECT_NAME}_src_LDFLAGS}  ${dlink}")
-endforeach(dlink)
-ENDIF(WIN32)
-
-ADD_DEFINITIONS(${omniORB4_cflags})
-
-
-# CORBA header generation
-SET(CORBA_AUTOMATIC_DIRECTORY ${${PROJECT_NAME}_BINARY_DIR}/stubs)
-
-  IF(IS_DIRECTORY ${CORBA_AUTOMATIC_DIRECTORY})
-    # Nothing to do
-  ELSE(IS_DIRECTORY ${CORBA_AUTOMATIC_DIRECTORY})
-    MAKE_DIRECTORY(${CORBA_AUTOMATIC_DIRECTORY})
-  ENDIF(IS_DIRECTORY ${CORBA_AUTOMATIC_DIRECTORY})
-
-  SET(ServerCommand_CPP "${CORBA_AUTOMATIC_DIRECTORY}/server-command-corbaSK.cc")
-  SET(ServerCommand_Header "${CORBA_AUTOMATIC_DIRECTORY}/server-command-corba.h")
-
-  SET(IDL_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME}")
-
-  IDLFILERULE(${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME}/server-command-corba.idl
-              ${ServerCommand_CPP} ${ServerCommand_Header}
-	      ${CORBA_AUTOMATIC_DIRECTORY} ${IDL_INCLUDE_DIR})
-
-  INCLUDE_DIRECTORIES(${CORBA_AUTOMATIC_DIRECTORY})
+GENERATE_IDL_FILE(
+  server-command-corba
+  ${CMAKE_SOURCE_DIR}/include/dg-middleware)
 
 INSTALL(FILES
-	   ${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME}/server-command-corba.idl
-	   DESTINATION share/${PROJECT_NAME}
-	   PERMISSIONS OWNER_READ GROUP_READ WORLD_READ OWNER_WRITE)
+  ${CMAKE_SOURCE_DIR}/include/dg-middleware/server-command-corba.idl
+  DESTINATION ${IDLDIR}
+  PERMISSIONS OWNER_READ GROUP_READ WORLD_READ OWNER_WRITE)
 
+SET(server-command_files
+  server-command-corbaSK.cc
+  server-command-corba.hh
+  corba-server-generic.cpp)
 
-SET(server-command_files ${ServerCommand_CPP} ${ServerCommand_Header} corba-server-generic.cpp)
-SET(server-abstract_files ${ServerCommand_CPP} ${ServerCommand_Header} corba-server-generic.cpp)
+SET(server-abstract_files
+  server-command-corbaSK.cc
+  server-command-corba.hh
+  corba-server-generic.cpp)
+
 SET(server-command_dependencies server-abstract)
+
+# Depend on a non-local plug-in.
 SET(distant-shell_dependencies
-	${CMAKE_INSTALL_PREFIX}/lib/plugin/contiifstream${CMAKE_SHARED_LIBRARY_SUFFIX}
-	exception-dgm)
+  ${DYNAMIC_GRAPH_PLUGINDIR}/contiifstream${CMAKE_SHARED_LIBRARY_SUFFIX}
+  exception-dgm)
 
 SET(libs
-	server-abstract
-	server-command
-	distant-shell
-	exception-dgm)
+  server-abstract
+  server-command
+  distant-shell
+  exception-dgm)
 
 FOREACH(lib ${libs})
-	ADD_LIBRARY(${lib}
-	  SHARED
-	  ${lib}.cpp
-	  ${${lib}_files})
+  ADD_LIBRARY(${lib}
+    SHARED
+    ${lib}.cpp
+    ${${lib}_files})
 
-	SET_TARGET_PROPERTIES(${lib}
-	  PROPERTIES
-	  SOVERSION ${PROJECT_VERSION}
-	  PREFIX ""
-	  INSTALL_RPATH ${CMAKE_INSTALL_PREFIX}/lib/plugin)
+  SET_TARGET_PROPERTIES(${lib}
+    PROPERTIES
+    SOVERSION ${PROJECT_VERSION}
+    PREFIX "")
 
-	IF (UNIX)
-		TARGET_LINK_LIBRARIES(${lib} ${DYNAMIC_GRAPH_LIBRARIES})
-		TARGET_LINK_LIBRARIES(${lib} ${Boost_LIBRARIES})
-		TARGET_LINK_LIBRARIES(${lib} ${omniORB4_link_FLAGS})
-		TARGET_LINK_LIBRARIES(${lib} "pthread")
-	ENDIF(UNIX)
+  TARGET_LINK_LIBRARIES(${lib} ${DYNAMIC_GRAPH_LIBRARIES})
+  TARGET_LINK_LIBRARIES(${lib} ${Boost_LIBRARIES})
+  TARGET_LINK_LIBRARIES(${lib} ${OMNIORB4_LIBRARIES})
 
-	TARGET_LINK_LIBRARIES(${lib} ${${lib}_dependencies})
+  TARGET_LINK_LIBRARIES(${lib} ${${lib}_dependencies})
 
-	IF(WIN32)
-		SET_TARGET_PROPERTIES(${lib}
-		  PROPERTIES
-		  LINK_FLAGS "${${PROJECT_NAME}_src_LDFLAGS}"
-		)
-	ENDIF(WIN32)
-
-	INSTALL(TARGETS ${lib}
-  	DESTINATION lib/plugin)
+  # Warning: *NEVER* rely on dynamic-graph full plug-in directory for
+  # installation as the prefix of dynamic-graph and dg-middleware may
+  # be different. Instead use the relative one and really install in
+  # the prefix asked by the user.
+  INSTALL(TARGETS ${lib} DESTINATION ${PLUGINDIR})
 ENDFOREACH(lib)
-

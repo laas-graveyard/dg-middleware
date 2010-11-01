@@ -18,42 +18,20 @@
  */
 
 #ifndef __SOT_DISTANTSHELL_HH__
-#define __SOT_DISTANTSHELL_HH__
+# define __SOT_DISTANTSHELL_HH__
 
-/* --------------------------------------------------------------------- */
-/* --- INCLUDE --------------------------------------------------------- */
-/* --------------------------------------------------------------------- */
+# ifdef HAVE_LIBBOOST_THREAD
+#  include <boost/thread.hpp>
+# endif
 
+# include <dynamic-graph/interpreter.h>
+# include <dynamic-graph/contiifstream.h>
+# include <dg-middleware/config.hh>
 
-#include <dynamic-graph/interpreter.h>
-#include <dynamic-graph/contiifstream.h>
-//#include <pthread.h>
-
-#ifdef HAVE_LIBBOOST_THREAD
-#include <boost/thread.hpp>
-#endif
-
-/* --------------------------------------------------------------------- */
-/* --- API ------------------------------------------------------------- */
-/* --------------------------------------------------------------------- */
-
-#if defined (WIN32) 
-#  if defined (distant_shell_EXPORTS)
-#    define DistantShell_EXPORT __declspec(dllexport)
-#  else  
-#    define DistantShell_EXPORT __declspec(dllimport)
-#  endif 
-#else
-#  define DistantShell_EXPORT
-#endif
 
 namespace dg = dynamicgraph;
 
-/* --------------------------------------------------------------------- */
-/* --- CLASS ----------------------------------------------------------- */
-/* --------------------------------------------------------------------- */
-
-class DistantShell_EXPORT DistantShell
+class DG_MIDDLEWARE_DLLAPI DistantShell
 {
  public:
   std::ofstream osOwn;
@@ -61,17 +39,15 @@ class DistantShell_EXPORT DistantShell
   dg::Contiifstream filein;
   dg::Interpreter& shell;
   std::ostream & os;
-/*   pthread_t loopThread; */
-/*   pthread_attr_t loopThreadAttr; */
 
 #ifdef HAVE_LIBBOOST_THREAD
   boost::thread* threadLoop;
 #else
   int* threadLoop;
-#endif 
+#endif
 
   bool endLoop;
-  
+
   unsigned int latency;
   static const unsigned int LATENCY_DEFAULT = 10;
 
@@ -108,7 +84,7 @@ class DistantShell_EXPORT DistantShell
 
 #include <dynamic-graph/entity.h>
 
-class DistantShell_EXPORT DistantShellPlugin
+class DG_MIDDLEWARE_DLLAPI DistantShellPlugin
 : public dg::Entity
 {
  protected:
