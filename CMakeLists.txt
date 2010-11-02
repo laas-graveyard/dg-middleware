@@ -16,6 +16,8 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
 INCLUDE(cmake/base.cmake)
+INCLUDE(cmake/boost.cmake)
+INCLUDE(cmake/pthread.cmake)
 
 # Meta-information.
 SET(PROJECT_NAME dg-middleware)
@@ -37,31 +39,12 @@ SET(PKG_CONFIG_ADDITIONAL_VARIABLES
   )
 
 # Search for Boost.
-SET(Boost_USE_STATIC_LIBS OFF)
-SET(Boost_USE_MULTITHREAD ON)
-FIND_PACKAGE(Boost 1.33 COMPONENTS program_options thread REQUIRED)
-SET(PKG_CONFIG_CFLAGS "${PKG_CONFIG_CFLAGS} -I${Boost_INCLUDE_DIR}")
-SET(PKG_CONFIG_LIBS "${PKG_CONFIG_LIBS} ${LIBDIR_KW}${Boost_LIBRARY_DIRS}")
-
+SET(BOOST_COMPONENTS program_options thread)
+SEARCH_FOR_BOOST()
 ADD_DEFINITIONS(-DHAVE_LIBBOOST_THREAD)
 
-
 # Search for Pthread.
-INCLUDE(FindThreads)
-IF(UNIX)
-  IF(CMAKE_USE_PTHREADS_INIT)
-    ADD_DEFINITIONS(-pthread)
-  ELSE(CMAKE_USE_PTHREADS_INIT)
-    MESSAGE(FATAL_ERROR
-      "Pthread is required on Unix, but "
-      ${CMAKE_THREAD_LIBS_INIT} " has been detected.")
-  ENDIF(CMAKE_USE_PTHREADS_INIT)
-ELSEIF(WIN32)
-  # Nothing to do.
-ELSE(UNIX)
-  MESSAGE(FATAL_ERROR "Thread support for this platform is not implemented.")
-ENDIF(UNIX)
-
+SEARCH_FOR_PTHREAD()
 
 # Search for dynamic-graph.
 ADD_REQUIRED_DEPENDENCY("dynamic-graph >= 1.0")
