@@ -21,10 +21,10 @@
 /* --- INCLUDE --------------------------------------------------------- */
 /* --------------------------------------------------------------------- */
 
-/* --- CORBA --- */
-#include <omniORB4/CORBA.h>
-
 #include <dynamic-graph/debug.h>
+
+/* --- CORBA --- */
+#include <dg-middleware/corba.hh>
 
 /* --- SOT --- */
 #include <dg-middleware/server-command.h>
@@ -85,7 +85,7 @@ ServerCommand::
 using namespace std;
 
 int & ServerCommand::
-OneInternalStep(int &dummy, int time)
+OneInternalStep(int &dummy, int)
 {
   return dummy;
 }
@@ -110,7 +110,7 @@ run( const char * cmdCorba ) throw(CORBA::SystemException)
 }
 
 void ServerCommand::
-getStringStream( CorbaServer::StringStreamer_out StringStreamer )
+getStringStream( CorbaServer::StringStreamer_out )
 {
 }
 

@@ -17,12 +17,13 @@
  * with dg-middleware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <list>
-#include <iostream>
-#include <string>
-#include <omniORB4/CORBA.h>
+#ifndef DG_MIDDLEWARE_CORBA_SERVER_GENERIC_H
+# define DG_MIDDLEWARE_CORBA_SERVER_GENERIC_H
+# include <list>
+# include <iostream>
+# include <string>
 
-
+# include <dg-middleware/corba.hh>
 
 class CorbaServerGeneric
 {
@@ -64,5 +65,5 @@ class CorbaServerGeneric
 };
 
 
-#include "corba-server-generic.t.cpp"
-
+# include "corba-server-generic.t.cpp"
+#endif //! DG_MIDDLEWARE_CORBA_SERVER_GENERIC_H

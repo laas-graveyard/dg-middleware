@@ -17,6 +17,7 @@
  * with dg-middleware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <cstdlib>
 #include <dg-middleware/corba-server-generic.h>
 
 /* -------------------------------------------------------------------------- */
@@ -52,8 +53,11 @@ initOrb( void )
   /* --- ORB init. --- */
   try
     {
-      int argc = 1; char *argv[] = { "CorbaServerGeneric" };
+      int argc = 1;
+      char* arg0 = strdup("CorbaServerGeneric");
+      char *argv[] = {arg0};
       orb = CORBA::ORB_init(argc, argv);
+      free (arg0);
       if(CORBA::is_nil(orb))
         {
           std::cerr << "CorbaServer: failed to initialize ORB" << std::endl;
@@ -66,7 +70,7 @@ initOrb( void )
 /** Make the CORBA object single-threaded to avoid GUI crash. */
 /* Create a single threaded policy object. */
 void CorbaServerGeneric::
-createThreadPolicy( bool inMultiThread )
+createThreadPolicy(bool)
 {
   try
     {
