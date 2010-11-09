@@ -24,7 +24,7 @@
 #include <dynamic-graph/debug.h>
 
 /* --- CORBA --- */
-#include <dg-middleware/corba.hh>
+#include <omniORB4/CORBA.h>
 
 /* --- SOT --- */
 #include <dg-middleware/server-command.h>
