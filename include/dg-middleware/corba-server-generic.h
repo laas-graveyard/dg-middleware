@@ -23,7 +23,7 @@
 # include <iostream>
 # include <string>
 
-# include <omniORB4/CORBA.h>
+# include <dg-middleware/corba.hh>
 
 class CorbaServerGeneric
 {

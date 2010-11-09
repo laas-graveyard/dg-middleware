@@ -20,6 +20,7 @@ server-abstract.h
 server-command.h
 distant-shell.h
 exception-dgm.h
+corba.hh
 )
 
 # Recreate correct path for the headers
