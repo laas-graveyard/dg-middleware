@@ -50,7 +50,7 @@ SEARCH_FOR_PTHREAD()
 ADD_REQUIRED_DEPENDENCY("dynamic-graph >= 1.0")
 
 # Search for omniORB.
-ADD_REQUIRED_DEPENDENCY("omniORB4 >= 4.1.4")
+ADD_REQUIRED_DEPENDENCY("omniORB4 >= 4.1.1")
 
 # Add extra keys to pkg-config file to export the location of the
 # installed IDL file.
