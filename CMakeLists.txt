@@ -21,7 +21,6 @@ INCLUDE(cmake/pthread.cmake)
 
 # Meta-information.
 SET(PROJECT_NAME dg-middleware)
-SET(PROJECT_VERSION 1.0.0.99)
 SET(PROJECT_DESCRIPTION "Dynamic graph distributed computation and control")
 SET(PROJECT_URL "http://github.com/jrl-umi3218/dg-middleware")
 
