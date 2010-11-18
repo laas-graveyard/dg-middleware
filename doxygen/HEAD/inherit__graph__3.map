@@ -1,7 +1,3 @@
 <map id="G" name="G">
-<area shape="rect" href="dynamic-graph.doxytag$classboost_1_1noncopyable.html" title="noncopyable" alt="" coords="7,32,100,61"/>
-<area shape="rect" href="dynamic-graph.doxytag$classdynamicgraph_1_1_entity.html" title="dynamicgraph::Entity" alt="" coords="151,32,292,61"/>
-<area shape="rect" href="$class_distant_shell_plugin.html" title="DistantShellPlugin" alt="" coords="341,5,469,35"/>
-<area shape="rect" href="$class_server_abstract.html" title="ServerAbstract" alt="" coords="352,59,459,88"/>
-<area shape="rect" href="$class_server_command.html" title="ServerCommand" alt="" coords="519,59,636,88"/>
+<area shape="rect" href="$classdynamicgraph_1_1_exception_dg_middleware.html" title="dynamicgraph::ExceptionDgMiddleware" alt="" coords="5,5,277,32"/>
 </map>
