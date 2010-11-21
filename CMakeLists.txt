@@ -18,7 +18,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 INCLUDE(cmake/base.cmake)
 INCLUDE(cmake/boost.cmake)
 INCLUDE(cmake/pthread.cmake)
-
+INCLUDE(cmake/cpack.cmake)
 # Meta-information.
 SET(PROJECT_NAME dg-middleware)
 SET(PROJECT_DESCRIPTION "Dynamic graph distributed computation and control")
