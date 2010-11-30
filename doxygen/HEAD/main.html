@@ -20,20 +20,20 @@
 <h1>dg-middleware Documentation</h1>  </div>
 </div>
 <div class="contents">
-<h3 class="version">1.1-24-g1de1 </h3><h2><a class="anchor" id="intro_dg-middleware"></a>
+<h3 class="version">1.1-26-g72b9 </h3><h2><a class="anchor" id="intro_dg-middleware"></a>
 Introduction</h2>
 <p>The dynamic-graph middleware package contains all 'middleware' components that go on top of dynamic-graph and allow distant access to entities.</p>
 <p>This includes:</p>
 <ul>
-<li>The <a class="el" href="class_server_command.html">ServerCommand</a> entity (load both server-abstract.so and server-command.so) This entity allows Corba connections into it, and executions of commands through the commandLine (see <a class="el" href="server-command_8h.html">server-command.h</a> for the list of supported functions)</li>
-<li>The <a class="el" href="class_distant_shell.html">DistantShell</a> entity (distant-shell.so) is a server-side entity that executes files remotely.</li>
+<li>The <a class="el" href="a00012.html">ServerCommand</a> entity (load both server-abstract.so and server-command.so) This entity allows Corba connections into it, and executions of commands through the commandLine (see <a class="el" href="a00021.html">server-command.h</a> for the list of supported functions)</li>
+<li>The <a class="el" href="a00007.html">DistantShell</a> entity (distant-shell.so) is a server-side entity that executes files remotely.</li>
 <li>The coshell program (installs in bin/sot) can be used to connect to the server remotely.</li>
 </ul>
 <h2><a class="anchor" id="How"></a>
 to use this package</h2>
-<p>If you wish to expose a corba server to your potential clients, simply load and create the <a class="el" href="class_server_command.html">ServerCommand</a> entity in your library.</p>
+<p>If you wish to expose a corba server to your potential clients, simply load and create the <a class="el" href="a00012.html">ServerCommand</a> entity in your library.</p>
 <p>Programs who wish to connect and execute commands (using the default scripting language) to your server can use the coshell executable (installed in /bin)</p>
-<p>If you want to customize the <a class="el" href="class_server_command.html">ServerCommand</a> behaviour, define a new entity that derives from the server-abstract entity. </p>
+<p>If you want to customize the <a class="el" href="a00012.html">ServerCommand</a> behaviour, define a new entity that derives from the server-abstract entity. </p>
 </div>
 </body>
 </html>
