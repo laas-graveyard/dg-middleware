@@ -24,7 +24,7 @@ ADD_DEFINITIONS(${OMNIORB4_CFLAGS})
 
 # provide path to library libdynamic-graph.so
 LINK_DIRECTORIES(${DYNAMIC_GRAPH_LIBRARY_DIRS})
-LINK_DIRECTORIES(../src)
+LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/src)
 
 SET(test_libs
 	CorbaConnection)
