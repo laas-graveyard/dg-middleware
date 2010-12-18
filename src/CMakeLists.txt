@@ -28,14 +28,6 @@ ADD_DEFINITIONS(-DDEBUG=2)
 # Make sure the generated CORBA headers will be found.
 INCLUDE_DIRECTORIES(${CMAKE_BINARY_DIR}/src)
 
-# Use dynamic-graph.
-ADD_DEFINITIONS(${DYNAMIC_GRAPH_CFLAGS})
-LINK_DIRECTORIES(${DYNAMIC_GRAPH_LIBRARY_DIRS})
-
-# Use omniORB4.
-ADD_DEFINITIONS(${OMNIORB4_CFLAGS})
-LINK_DIRECTORIES(${OMNIORB4_LIBRARY_DIRS})
-
 GENERATE_IDL_FILE(
   server-command-corba
   ${CMAKE_SOURCE_DIR}/include/dg-middleware)
@@ -79,9 +71,12 @@ FOREACH(lib ${libs})
     SOVERSION ${PROJECT_VERSION}
     PREFIX "")
 
-  TARGET_LINK_LIBRARIES(${lib} ${DYNAMIC_GRAPH_LIBRARIES})
+  # Use dynamic-graph.
+  PKG_CONFIG_USE_DEPENDENCY(${lib} dynamic-graph)
+  PKG_CONFIG_USE_DEPENDENCY(${lib} jrl-mal)
+  PKG_CONFIG_USE_DEPENDENCY(${lib} omniORB4)
+
   TARGET_LINK_LIBRARIES(${lib} ${Boost_LIBRARIES})
-  TARGET_LINK_LIBRARIES(${lib} ${OMNIORB4_LIBRARIES})
 
   TARGET_LINK_LIBRARIES(${lib} ${${lib}_dependencies})
 

@@ -48,6 +48,9 @@ SEARCH_FOR_PTHREAD()
 # Search for dynamic-graph.
 ADD_REQUIRED_DEPENDENCY("dynamic-graph >= 1.0")
 
+# Search for jrl-mal
+ADD_REQUIRED_DEPENDENCY("jrl-mal >= 1.0")
+
 # Search for omniORB.
 ADD_REQUIRED_DEPENDENCY("omniORB4 >= 4.1.1")
 
