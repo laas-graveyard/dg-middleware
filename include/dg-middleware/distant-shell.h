@@ -72,7 +72,10 @@ class DG_MIDDLEWARE_DLLAPI DistantShell
 
   ~DistantShell( void );
 
-  void inputFile( const std::string& filename ) { filein = filename; }
+  void inputFile (const std::string& filename)
+  {
+    filein = dg::Contiifstream (filename);
+  }
 
   void loop( const int latency = LATENCY_DEFAULT ); // in ms
   void loopInThread( void );
