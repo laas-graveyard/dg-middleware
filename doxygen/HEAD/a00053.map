@@ -1,8 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" href="dynamic&#45;graph.doxytag$a00009.html" title="dynamicgraph::Entity" alt="" coords="88,386,243,412"/>
-<area shape="rect" href="dynamic&#45;graph.doxytag$a00019.html" title="noncopyable" alt="" coords="5,87,107,114"/>
-<area shape="rect" href="dynamic&#45;graph.doxytag$a00030.html" title="dynamicgraph::SignalBase\&lt; int \&gt;" alt="" coords="147,180,384,207"/>
-<area shape="rect" title="STL class." alt="" coords="389,87,475,114"/>
-<area shape="rect" href="$a00006.html" title="CorbaServerGeneric" alt="" coords="613,180,763,207"/>
-<area shape="rect" title="STL class." alt="" coords="340,7,524,34"/>
+<area shape="rect" href="$a00012.html" title="ServerCommand" alt="" coords="17,161,148,188"/>
+<area shape="rect" href="dynamic-graph.doxytag$a00008.html" title="dynamicgraph::Entity" alt="" coords="5,7,160,33"/>
 </map>

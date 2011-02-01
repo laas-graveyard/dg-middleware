@@ -1,18 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" href="$a00011.html" title="ServerAbstract" alt="" coords="2451,345,2568,372"/>
-<area shape="rect" href="dynamic&#45;graph.doxytag$a00009.html" title="dynamicgraph::Entity" alt="" coords="1913,314,2068,341"/>
-<area shape="rect" href="dynamic&#45;graph.doxytag$a00019.html" title="noncopyable" alt="" coords="271,389,372,416"/>
-<area shape="rect" href="dynamic&#45;graph.doxytag$a00030.html" title="dynamicgraph::SignalBase\&lt; int \&gt;" alt="" coords="552,338,789,365"/>
-<area shape="rect" href="dynamic&#45;graph.doxytag$a00030.html" title="dynamicgraph::SignalBase\&lt; Time \&gt;" alt="" coords="545,541,796,568"/>
-<area shape="rect" title="STL class." alt="" coords="279,224,364,250"/>
-<area shape="rect" href="$a00006.html" title="CorbaServerGeneric" alt="" coords="596,440,745,466"/>
-<area shape="rect" title="STL class." alt="" coords="5,224,189,250"/>
-<area shape="rect" href="dynamic&#45;graph.doxytag$a00033.html" title="dynamicgraph::SignalPtr\&lt; ml::Vector, int \&gt;" alt="" coords="1843,461,2139,488"/>
-<area shape="rect" href="dynamic&#45;graph.doxytag$a00027.html" title="dynamicgraph::Signal\&lt; T, Time \&gt;" alt="" coords="1093,512,1328,538"/>
-<area shape="rect" href="dynamic&#45;graph.doxytag$a00034.html" title="dynamicgraph::SignalTimeDependent\&lt; double, int \&gt;" alt="" coords="1812,526,2169,553"/>
-<area shape="rect" href="dynamic&#45;graph.doxytag$a00034.html" title="dynamicgraph::SignalTimeDependent\&lt; ml::Vector, int \&gt;" alt="" coords="1801,652,2180,678"/>
-<area shape="rect" href="dynamic&#45;graph.doxytag$a00034.html" title="dynamicgraph::SignalTimeDependent\&lt; int, int \&gt;" alt="" coords="1825,590,2156,617"/>
-<area shape="rect" href="dynamic&#45;graph.doxytag$a00035.html" title="dynamicgraph::TimeDependency\&lt; Time \&gt;" alt="" coords="1065,594,1356,621"/>
-<area shape="rect" href="$a00010.html" title="s_dataStack" alt="" coords="1941,708,2040,734"/>
-<area shape="rect" href="$a00013.html" title="tsData" alt="" coords="639,741,703,768"/>
+<area shape="rect" href="$a00011.html" title="ServerAbstract" alt="" coords="24,84,141,111"/>
+<area shape="rect" href="dynamic-graph.doxytag$a00008.html" title="dynamicgraph::Entity" alt="" coords="5,7,160,33"/>
 </map>
