@@ -1,0 +1,3 @@
+opt/openrobots/bin/*
+opt/openrobots/lib/plugin/*.so.*
+opt/openrobots/share/man/*

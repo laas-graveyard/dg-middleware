@@ -297,39 +297,48 @@ readInputVectorSignal( long int signalRankCorba,
 {
   dgDEBUGIN(15);
 
-	int signalRank = signalRankCorba ;
-	dg::SignalPtr<ml::Vector,int>& signal = *vectorSIN[signalRank];
+  CorbaServer::DoubleSeq_var resCorba( new CorbaServer::DoubleSeq );
+  
+  int signalRank = signalRankCorba ;
+  if ((signalRank<0) || (signalRank>=vectorSIN.size()))
+    {
+      resCorba->length(0);
+      value=resCorba._retn();
+      return;
+    }
 
-	const ml::Vector& data = signal.accessCopy();
-	CorbaServer::DoubleSeq_var resCorba( new CorbaServer::DoubleSeq );
-	unsigned int lsizeOfSTD = 0;
-	dataStack &aDS = vectorSINStored[signalRank];
+  dg::SignalPtr<ml::Vector,int>& signal = *vectorSIN[signalRank];
+  
+  const ml::Vector& data = signal.accessCopy();
 
-	if (!aDS.turnaround)
-	  lsizeOfSTD=aDS.index;
-	else
-	  lsizeOfSTD=aDS.stackOfTsData.size();
-
-	if (lsizeOfSTD==0)
-	  {
-		resCorba->length( data.size() );
-		for( unsigned int i=0;i<data.size();++i ){ resCorba[i]=data(i); }
-	  }
-	else
-	  {
-		resCorba->length( (data.size()+1)*lsizeOfSTD );
-
-		unsigned int lindex = 0;
-
-		for(unsigned int j=0;j<lsizeOfSTD;j++)
+  unsigned int lsizeOfSTD = 0;
+  dataStack &aDS = vectorSINStored[signalRank];
+  
+  if (!aDS.turnaround)
+    lsizeOfSTD=aDS.index;
+  else
+    lsizeOfSTD=aDS.stackOfTsData.size();
+  
+  if (lsizeOfSTD==0)
+    {
+      resCorba->length( data.size() );
+      for( unsigned int i=0;i<data.size();++i ){ resCorba[i]=data(i); }
+    }
+  else
+    {
+      resCorba->length( (data.size()+1)*lsizeOfSTD );
+      
+      unsigned int lindex = 0;
+      
+      for(unsigned int j=0;j<lsizeOfSTD;j++)
 	{
 	  resCorba[lindex++]=aDS.stackOfTsData[j].ts;
 	  for( unsigned int i=0;i<data.size();++i )
-		{ resCorba[lindex++]=aDS.stackOfTsData[j].data[i]; }
+	    { resCorba[lindex++]=aDS.stackOfTsData[j].data[i]; }
 	}
-	  }
-	value=resCorba._retn();
-
+    }
+  value=resCorba._retn();
+  
   dgDEBUGOUT(15);
 }
 
@@ -349,15 +358,17 @@ readSeqInputVectorSignal( const CorbaServer::SeqOfRank& signalRanks,
       liRank++)
     {
       int signalRank = signalRanks[liRank] ;
-      SignalPtr<ml::Vector,int>& signal = *vectorSIN[signalRank];
-
-      const ml::Vector& data = signal.accessCopy();
-      CorbaServer::DoubleSeq  resCorba = aSDS[liRank];
-
-      resCorba.length( data.size() );
-      for( unsigned int i=0;i<data.size();++i )
-	{ resCorba[i]=data(i); }
-
+      if ((signalRank>=0) && (signalRank<vectorSIN.size()))
+	{
+	  SignalPtr<ml::Vector,int>& signal = *vectorSIN[signalRank];
+	  
+	  const ml::Vector& data = signal.accessCopy();
+	  CorbaServer::DoubleSeq  resCorba = aSDS[liRank];
+	  
+	  resCorba.length( data.size() );
+	  for( unsigned int i=0;i<data.size();++i )
+	    { resCorba[i]=data(i); }
+	}
     }
   values=aSDS._retn();
 

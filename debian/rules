@@ -8,6 +8,15 @@
 
 # Uncomment this to turn on verbose mode.
 export DH_VERBOSE=1
+export PKG_CONFIG_PATH=/opt/openrobots/lib/pkgconfig:$PKG_CONFIG_PATH
+CFLAGS = -O3 -DNDEBUG
+CXXFLAGS = -O3 -DNDEBUG
+LD_LIBRARY_PATH += /opt/openrobots/lib
+export LD_LIBRARY_PATH
+
+override_dh_auto_configure:
+	dh_auto_configure -- -DCMAKE_BUILD_TYPE=RELEASE -DGENERATE_DOC=ON -DCMAKE_INSTALL_PREFIX=/opt/openrobots
+
 
 override_dh_auto_configure:
 	dh_auto_configure -- -DGENERATE_DOC=ON
@@ -23,9 +32,7 @@ override_dh_makeshlibs:
 # plug-ins.
 # Teach dh_shlibdeps where the plug-in are located.
 override_dh_shlibdeps:
-	export LD_LIBRARY_PATH=\
-debian/libdg-middleware1.0.0.99/usr/lib/plugin:$(LD_LIBRARY_PATH) \
-&& dh_shlibdeps --
+	LD_LIBRARY_PATH=/opt/openrobots/lib:/opt/openrobots/lib/plugin/usr/lib/libfakeroot/:/usr/lib64/libfakeroot:/usr/lib32/libfakeroot dpkg-shlibdeps
 
 %:
 	dh  $@
