@@ -1,3 +1,9 @@
+dg-middleware (1.2.1-1) lucid; urgency=low
+
+  * First bunch of test for binary package generation
+
+ -- olivier-stasse <olivier.stasse@aist.go.jp>  Sun, 17 Apr 2011 03:40:12 +0900
+
 dg-middleware (1.0.0.99-3) lucid; urgency=low
 
   * Add libjrl-mal-dev as build requirement.
