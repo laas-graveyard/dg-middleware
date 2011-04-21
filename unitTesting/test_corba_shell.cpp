@@ -170,7 +170,7 @@ int main (int argc, char* argv[])
   catch (PrintUsage& printUsage)
     {
       std::cout << printUsage.usage_ << std::endl;
-      return 0;
+      return 1;
     }
   catch (std::exception& error)
     {
@@ -182,7 +182,7 @@ int main (int argc, char* argv[])
       std::cerr
 	<< "Unexpected exception catched. Aborting..."
 	<< std::endl;
-      return -1;
+      return 1;
     }
-  return 0;
+  return 1;
 }

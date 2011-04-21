@@ -30,12 +30,12 @@ SET(test_libs
 	CorbaConnection)
 
 SET(tests
-	dummy
-	test_corba_shell)
+	dummy)
 SET(test_corba_shell_additional_files connecttoshell.cpp)
 
 SET(tools
-	coshell)
+	coshell
+	test_corba_shell)
 SET(coshell_additional_files connecttoshell.cpp)
 
 FOREACH(test ${test_libs})
