@@ -38,7 +38,6 @@ Description: Corba middleware interface for dynamic graph.
  This package provides the corba interface to control a dynamic graph.
  .
 
-
 Package: libdg-middleware-doc
 Section: doc
 Architecture: all
