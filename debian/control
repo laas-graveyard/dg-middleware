@@ -24,10 +24,8 @@ Architecture: any
 Depends: libdg-middleware1.2.1 (= ${binary:Version}), ${misc:Depends}
 Recommends: omniidl
 Suggests: libdg-middleware-doc
-Description: Dynamic graph C++ library development package
- The dynamic graph library allows the representation of data-flow in C++.
- It provides fast graph evaluation and a simple script language to manipulate
- the graph actions.
+Description: Corba middleware interface for dynamic graph.
+ This package provides the corba interface to control a dynamic graph.
  .
  This package contains development files (headers and pkg-config file).
 
@@ -36,10 +34,9 @@ Package: libdg-middleware1.2.1
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Suggests: rlwrap
-Description: Dynamic graph C++ library
- The dynamic graph library allows the representation of data-flow in C++.
- It provides fast graph evaluation and a simple script language to manipulate
- the graph actions.
+Description: Corba middleware interface for dynamic graph.
+ This package provides the corba interface to control a dynamic graph.
+ .
 
 
 Package: libdg-middleware-doc
@@ -47,9 +44,17 @@ Section: doc
 Architecture: all
 Depends: ${misc:Depends}
 Suggests: libdynamic-graph-doc
-Description: documentation for the dynamic graph C++ library
- The dynamic graph library allows the representation of data-flow in C++.
- It provides fast graph evaluation and a simple script language to manipulate
- the graph actions.
+Description: documentation for the corba interface to the dynamic graph
+ This package provides the corba interface to control a dynamic graph.
  .
  This package contains the Doxygen documentation.
+
+Package: libdg-middleware-dbg
+Architecture: any
+Section: debug
+Priority: extra
+Depends:  libdg-middleware (= 1.2.1)
+Description: debugging symbols for libdg-middleware
+ This package provides the corba interface to control a dynamic graph.
+  .
+ This package contains the debugging symbols for libdg-middleware.
