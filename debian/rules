@@ -21,22 +21,24 @@ override_dh_strip:
 override_dh_auto_configure:
 	dh_auto_configure -- -DCMAKE_BUILD_TYPE=RELEASE -DGENERATE_DOC=ON -DCMAKE_INSTALL_PREFIX=/opt/openrobots
 
-
-override_dh_auto_configure:
-	dh_auto_configure -- -DGENERATE_DOC=ON
-
 # Remove useless ldconfig call.
 override_dh_makeshlibs:
 	dh_makeshlibs --
-	rm debian/libdg-middleware1.0.0.99.postinst.debhelper
-	rm debian/libdg-middleware1.0.0.99.postrm.debhelper
+	rm debian/libdg-middleware1.2.1.postinst.debhelper
+	rm debian/libdg-middleware1.2.1.postrm.debhelper
 
 
 # FIXME: this is only necessary because some binaries are linked against
 # plug-ins.
 # Teach dh_shlibdeps where the plug-in are located.
 override_dh_shlibdeps:
-	LD_LIBRARY_PATH=/opt/openrobots/lib:/opt/openrobots/lib/plugin/usr/lib/libfakeroot/:/usr/lib64/libfakeroot:/usr/lib32/libfakeroot dpkg-shlibdeps
-
+	LD_LIBRARY_PATH=/opt/openrobots/lib:/opt/openrobots/lib/plugin:/usr/lib/libfakeroot/:/usr/lib64/libfakeroot:/usr/lib32/libfakeroot dpkg-shlibdeps \
+	-Tdebian/libdg-middleware1.2.1.substvars \
+	debian/libdg-middleware1.2.1/opt/openrobots/bin/dg-test_corba_shell \
+	debian/libdg-middleware1.2.1/opt/openrobots/bin/dg-coshell \
+	debian/libdg-middleware1.2.1/opt/openrobots/lib/plugin/distant-shell.so.1.2.1 \
+	debian/libdg-middleware1.2.1/opt/openrobots/lib/plugin/server-abstract.so.1.2.1 \
+	debian/libdg-middleware1.2.1/opt/openrobots/lib/plugin/exception-dgm.so.1.2.1 \
+	debian/libdg-middleware1.2.1/opt/openrobots/lib/plugin/server-command.so.1.2.1
 %:
 	dh  $@
