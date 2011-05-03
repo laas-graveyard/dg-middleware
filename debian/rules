@@ -36,9 +36,9 @@ override_dh_shlibdeps:
 	-Tdebian/libdg-middleware1.2.1.substvars \
 	debian/libdg-middleware1.2.1/opt/openrobots/bin/dg-test_corba_shell \
 	debian/libdg-middleware1.2.1/opt/openrobots/bin/dg-coshell \
-	debian/libdg-middleware1.2.1/opt/openrobots/lib/plugin/distant-shell.so.1.2.1 \
-	debian/libdg-middleware1.2.1/opt/openrobots/lib/plugin/server-abstract.so.1.2.1 \
-	debian/libdg-middleware1.2.1/opt/openrobots/lib/plugin/exception-dgm.so.1.2.1 \
-	debian/libdg-middleware1.2.1/opt/openrobots/lib/plugin/server-command.so.1.2.1
+	debian/libdg-middleware1.2.1/opt/openrobots/lib/plugin/distant-shell.so \
+	debian/libdg-middleware1.2.1/opt/openrobots/lib/plugin/server-abstract.so \
+	debian/libdg-middleware1.2.1/opt/openrobots/lib/plugin/exception-dgm.so \
+	debian/libdg-middleware1.2.1/opt/openrobots/lib/plugin/server-command.so
 %:
 	dh  $@
