@@ -12,6 +12,7 @@
 # General Lesser Public License for more details.  You should have
 # received a copy of the GNU Lesser General Public License along with
 # dg-middleware. If not, see <http://www.gnu.org/licenses/>.
+INCLUDE(../cmake/createshexe.cmake)
 
 ADD_DEFINITIONS(-DDEBUG=2)
 
@@ -92,4 +93,5 @@ FOREACH(tool ${tools})
 	# FIXME: what is this?
 	TARGET_LINK_LIBRARIES(${EXECUTABLE_NAME} CorbaConnection)
 	INSTALL(TARGETS ${EXECUTABLE_NAME} DESTINATION bin)
+	CREATE_SH_EXE(${EXECUTABLE_NAME})
 ENDFOREACH(tool)
